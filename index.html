@@ -1,3 +1,37 @@
+<body>
+	<h1>Welcome to MailtoRedirect</h1>
+	<p>This site allows <code>mailto:</code> links to be entered in places where a <code>http://</code> or <code>https://</code> url is expected.
+</p>
+<p>Enter an email address below to get a link that will open as a mailto link:</p>
+
+<label>Email Address:
+	<input type="text" id="email" name="email">
+</label>
+
+<p>Your link is: <a id="emaillink">enter an email to get a link</a></p>
+
+
+</body>
+<script>
+	let emailField = document.getElementById("email")
+	let linkField = document.getElementById("emaillink")
+
+
+	emailField.oninput = (event) => {
+		// console.log(event.target.value)
+		let enteredText = event.target.value
+
+		if (enteredText.length == 0){
+			linkField.removeAttribute("href")
+			linkField.innerText = "enter an email to get a link"
+		} else {
+			let url = window.location.toString().split("?")[0] + "?email=" + enteredText
+			linkField.href = url
+			linkField.innerText = url
+		}
+	}
+
+</script>
 <script>
 	let urlString = window.location.toString()
 	let paramString = urlString.split('?')[1];
