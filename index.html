@@ -3,8 +3,11 @@
 	let paramString = urlString.split('?')[1];
 	let queryString = new URLSearchParams(paramString);
 
-	for (let pair of queryString.entries()) {
-		console.log("Key is: " + pair[0]);
-		console.log("Value is: " + pair[1]);
-	}
+	let email = queryString.get("email")
+
+	let w = window.open("mailto:" + email)
+
+	setTimeout(()=> {
+		w.close()
+	}, 500)
 </script>
