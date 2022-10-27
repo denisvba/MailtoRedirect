@@ -5,9 +5,12 @@
 
 	let email = queryString.get("email")
 
-	let w = window.open("mailto:" + email)
+	if (email){
+		let w = window.open("mailto:" + email)
 
-	setTimeout(()=> {
-		w.close()
-	}, 500)
+		setTimeout(() => {
+			w.close()
+		}, 500)
+	}
+	
 </script>
