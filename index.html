@@ -1,5 +1,5 @@
 <body>
-	<h1>Welcome to MailtoRedirect</h1>
+	<h1>Welcome to Mailto Redirect</h1>
 	<p>This site allows <code>mailto:</code> links to be entered in places where a <code>http://</code> or <code>https://</code> url is expected.
 </p>
 <p>Enter an email address below to get a link that will open as a mailto link:</p>
@@ -10,43 +10,47 @@
 
 <p>Your link is: <a id="emaillink">enter an email to get a link</a></p>
 
-<p>The source code of this website can be found at: <a href="https://github.com/MoralCode/MailtoRedirect">https://github.com/MoralCode/MailtoRedirect</a></p>
+<p>The source code of this website can be found at: <a href="https://github.com/denisvba/mailto-redirect">https://github.com/denisvba/mailto-redirect</a></p>
 
 
 </body>
 <script>
-	let emailField = document.getElementById("email")
-	let linkField = document.getElementById("emaillink")
+	// Prints the final link to the screen as the user types it
+	let emailField = document.getElementById("email");
+	let linkField = document.getElementById("emaillink");
 
 
 	emailField.oninput = (event) => {
-		// console.log(event.target.value)
-		let enteredText = event.target.value
+		// console.log(event.target.value);
+		let enteredText = event.target.value;
 
 		if (enteredText.length == 0){
-			linkField.removeAttribute("href")
-			linkField.innerText = "enter an email to get a link"
+			linkField.removeAttribute("href");
+			linkField.innerText = "enter an email to get a link";
 		} else {
-			let url = window.location.toString().split("?")[0] + "?email=" + enteredText
-			linkField.href = url
-			linkField.innerText = url
+			let url = window.location.toString().split("?")[0] + "?email=" + enteredText;
+			linkField.href = url;
+			linkField.innerText = url;
 		}
 	}
 
 </script>
 <script>
-	let urlString = window.location.toString()
-	let paramString = urlString.split('?')[1];
+	// Replaces the current URL by a mailto: URL from given slice point (first question mark [?]) and opens it
+	let urlString = window.location.toString();
+	// let paramString = urlString.split('?')[1];
+	// TODO: Improve this next line to avoid hardcoded shenanigans
+	let paramString = urlString.slice(43,); // 43 is the last slash of the specific URL "https://denisvba.github.io/mailto-redirect/"
 	let queryString = new URLSearchParams(paramString);
 
-	let email = queryString.get("email")
+	let email = queryString.get("email");
 
 	if (email){
-		let w = window.open("mailto:" + email)
+		let w = window.open("mailto:" + email);
 
 		setTimeout(() => {
-			w.close()
-		}, 500)
+			w.close();
+		}, 500);
 	}
 	
 </script>
